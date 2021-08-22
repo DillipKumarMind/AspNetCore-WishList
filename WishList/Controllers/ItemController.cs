@@ -27,16 +27,17 @@ namespace WishList.Controllers
             return View("Create");
         }
         [HttpPost]
-        public IActionResult Create(Item item)
+        public IActionResult Create(Models.Item item)
         {
             _context.Items.Add(item);
             _context.SaveChanges();
             return View("Index");
         }
         [HttpPost]
-        public IActionResult Delete(int Id)
+        public IActionResult Delete(int id)
         {
-            _context.Items.Remove(_context.Items.First(p => p.Id == Id));
+            var item = _context.Items.FirstOrDefault(e => e.Id == id);
+            _context.Items.Remove(item);
             _context.SaveChanges();
             return View("Index");
         }
